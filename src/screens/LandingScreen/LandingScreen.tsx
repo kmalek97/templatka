@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Image, Text, View} from 'react-native';
-import Geocoder, {GeocodingObject} from '@timwangdev/react-native-geocoder';
 
+import Geocoder from '@timwangdev/react-native-geocoder';
 import RNLocation, {Location} from 'react-native-location';
 
 import {styles} from './LandindScreen.styles';
 
+import {useNavigation} from '../../utils';
+
 const LandingScreen = () => {
+  const {navigate} = useNavigation();
+
   RNLocation.configure({
     distanceFilter: 50,
   });
@@ -49,11 +53,18 @@ const LandingScreen = () => {
 
   const getLocation = async () => {
     await RNLocation.getLatestLocation({timeout: 100}).then(data => {
-      console.log('location:', data);
       if (data) {
         address(data).then(v => {
           setTest2(v);
-          setDisplayAddress(v[0].formattedAddress);
+
+          let currentLocation = v[0].formattedAddress;
+          setDisplayAddress(currentLocation);
+
+          if (currentLocation) {
+            setTimeout(() => {
+              navigate('homeStack');
+            }, 2000);
+          }
         });
       }
     });
