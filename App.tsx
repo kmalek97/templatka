@@ -15,7 +15,10 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import HomeScreen from './src/screens/HomeScreen/HomeScreen';
 
-import LandingScreen from './src/screens/LandingScreen/LandingScreen';
+import {Provider} from 'react-redux';
+import {store} from './src/redux';
+
+import {LandingScreen} from './src/screens/LandingScreen/LandingScreen';
 
 const switchNavigator = createSwitchNavigator({
   landingStack: {
@@ -98,7 +101,11 @@ const switchNavigator = createSwitchNavigator({
 const AppNavigation = createAppContainer(switchNavigator);
 
 const App = () => {
-  return <AppNavigation />;
+  return (
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
+  );
 };
 
 export default App;

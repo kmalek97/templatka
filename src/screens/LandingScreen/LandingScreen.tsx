@@ -8,7 +8,17 @@ import {styles} from './LandindScreen.styles';
 
 import {useNavigation} from '../../utils';
 
-const LandingScreen = () => {
+import {connect} from 'react-redux';
+import {onUpdateLocation, UserState, ApplicationState} from '../../redux';
+
+interface LandingProps {
+  userReduce: UserState;
+  onUpdateLocation: Function;
+}
+
+const _LandingScreen: React.FC<LandingProps> = props => {
+  const {userReducer, onUpdateLocation} = props;
+
   const {navigate} = useNavigation();
 
   RNLocation.configure({
@@ -101,4 +111,12 @@ const LandingScreen = () => {
   );
 };
 
-export default LandingScreen;
+const mapToStateProps = (state: ApplicationState) => ({
+  userReducer: state.userReducer,
+});
+
+const LandingScreen = connect(mapToStateProps, {onUpdateLocation})(
+  _LandingScreen,
+);
+
+export {LandingScreen};
