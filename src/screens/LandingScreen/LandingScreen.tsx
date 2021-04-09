@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 import {onUpdateLocation, UserState, ApplicationState} from '../../redux';
 
 interface LandingProps {
-  userReduce: UserState;
+  userReducer: UserState;
   onUpdateLocation: Function;
 }
 
@@ -69,6 +69,8 @@ const _LandingScreen: React.FC<LandingProps> = props => {
 
           let currentLocation = v[0].formattedAddress;
           setDisplayAddress(currentLocation);
+
+          onUpdateLocation(v[0]);
 
           if (currentLocation) {
             setTimeout(() => {

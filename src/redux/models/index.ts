@@ -1,4 +1,4 @@
-import {Location} from 'react-native-location';
+import {GeocodingObject} from '@timwangdev/react-native-geocoder';
 
 export interface Category {
   title: String;
@@ -40,7 +40,7 @@ export interface UserModel {
 
 export interface UserState {
   user: UserModel;
-  location: Location;
+  location: GeocodingObject;
   error: string | undefined;
 }
 

@@ -1,10 +1,10 @@
-import {Location} from 'react-native-location';
+import {GeocodingObject} from '@timwangdev/react-native-geocoder';
 import {UserAction} from '../actions';
 import {UserModel, UserState} from '../models';
 
 const initialState: UserState = {
   user: {} as UserModel,
-  location: {} as Location,
+  location: {} as GeocodingObject,
   error: undefined,
 };
 
